@@ -1,0 +1,14 @@
+LA TABERNA BEBIDAS | INSTALACION
+
+1. Descomprimir el ZIP en una carpeta.
+2. Abrir ESA carpeta en Visual Studio Code.
+3. En la terminal escribir:
+   npm install
+   npm run dev
+4. Tienda: http://localhost:3000
+5. Panel de administracion: http://localhost:3000/admin
+
+IMPORTANTE: package.json esta en la carpeta principal.
+El proyecto es una maqueta funcional; para produccion requiere
+base de datos, proteccion del administrador y guardado en servidor.
+Leer README.md para informacion completa.
