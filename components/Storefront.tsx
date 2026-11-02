@@ -200,74 +200,28 @@ export default function Storefront() {
     </header>
 
     <main id="inicio">
-      <section
-        className="container"
-        aria-label="La Taberna Bebidas"
-        style={{
-          position: "relative",
-          height: "clamp(132px, 18vw, 180px)",
-          marginTop: 12,
-          marginBottom: 0,
-          borderRadius: 14,
-          overflow: "hidden",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background:
-            "linear-gradient(110deg, rgba(9, 25, 47, 0.88), rgba(29, 79, 135, 0.68))",
-          backdropFilter: "blur(14px)",
-          WebkitBackdropFilter: "blur(14px)",
-          border: "1px solid rgba(72, 132, 195, 0.20)",
-          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.16)",
-        }}
-      >
+      <section className="container taberna-hero" aria-label="La Taberna Bebidas">
+        <div className="taberna-hero-orbit" aria-hidden="true" />
         <Image
+          className="taberna-hero-logo"
           src="/images/la-taberna-logo.png"
           alt="La Taberna Bebidas"
-          width={108}
-          height={108}
+          width={116}
+          height={116}
           priority
-          style={{
-            display: "block",
-            width: "clamp(84px, 11vw, 108px)",
-            height: "auto",
-            aspectRatio: "1 / 1",
-            objectFit: "contain",
-            borderRadius: "50%",
-            boxShadow: "0 7px 20px rgba(0,0,0,0.20)",
-          }}
         />
       </section>
 
-      <div className="container" style={{ display: "flex", justifyContent: "center", marginTop: 14, marginBottom: 18 }}>
-        <div
-          role="status"
-          aria-live="polite"
-          style={{
-            display: "inline-flex", alignItems: "center", gap: 10,
-            background: "#fff", border: "1px solid #e1e7ef",
-            borderRadius: 999, padding: "10px 16px", color: "#21344c",
-            fontSize: 12, fontWeight: 700,
-            boxShadow: "0 4px 14px rgba(12,35,61,.04)",
-            maxWidth: "100%", textAlign: "center",
-          }}
-        >
-          <span
-            aria-hidden="true"
-            style={{
-              width: 10, height: 10, flexShrink: 0,
-              borderRadius: "50%",
-              background: estadoLocal?.abierto ? "#18a35f" : "#a7b0bc",
-              boxShadow: estadoLocal?.abierto ? "0 0 0 4px rgba(24,163,95,.13)" : "none",
-            }}
-          />
-          {estadoLocal?.texto ?? "Consultando horario..."}
+      <div className="container taberna-status-wrap">
+        <div className={`taberna-status ${estadoLocal?.abierto ? "is-open" : "is-closed"}`} role="status" aria-live="polite">
+          <span className="taberna-status-light" aria-hidden="true" />
+          <span>{estadoLocal?.texto ?? "Consultando horarios..."}</span>
         </div>
       </div>
 
       <section className="catalog-area" id="catalogo">
         <div className="container">
-          <div className="catalog-head"><div><p className="eyebrow"><Wine size={16}/> NUESTRO CATÁLOGO</p><h2>Elegí tus <span>bebidas.</span></h2><p>Encontrá lo que necesitás para tu próxima ocasión.</p></div><span className="catalog-count">{visible.length} productos</span></div>
+          <div className="catalog-head"><div><p className="eyebrow"><Wine size={16}/> NUESTRO CATÁLOGO</p><h2>Explorá el catálogo<span>.</span></h2><p>Elegí tus bebidas, compará precios y armá tu selección.</p></div><span className="catalog-count">{visible.length} productos</span></div>
           <div className="catalog-tools"><label className="search-input"><Search size={21}/><input ref={searchRef} value={search} onChange={e=>setSearch(e.target.value)} placeholder="Buscar bebidas, marcas, categorías..." aria-label="Buscar productos"/>{search && <button aria-label="Borrar búsqueda" type="button" onClick={()=>setSearch("")}><X size={17}/></button>}</label>
             <label className="sort-select"><SlidersHorizontal size={17}/><select aria-label="Ordenar productos" value={sort} onChange={e=>setSort(e.target.value as Sort)}><option value="destacados">Destacados</option><option value="menor">Menor precio</option><option value="mayor">Mayor precio</option><option value="nombre">Nombre A-Z</option></select><ChevronDown size={16}/></label></div>
           <div className="category-tabs" role="group" aria-label="Filtrar categoría">{CATEGORIES.map(c=><button type="button" className={c===category?"current":""} key={c} onClick={()=>setCategory(c)}>{c}</button>)}</div>
@@ -282,7 +236,7 @@ export default function Storefront() {
       <section className="contact-banner container" id="contacto">
         <div>
           <p className="eyebrow-light">UNA FORMA SIMPLE DE COMPRAR</p>
-          <h2>Tu catálogo, siempre a mano.</h2>
+          <h2>Todo en un mismo lugar.</h2>
           <p>Explorá las bebidas y probá cómo se realiza un pedido desde la web.</p>
         </div>
         <span style={{
